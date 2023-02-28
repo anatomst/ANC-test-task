@@ -1,13 +1,24 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .forms import LinkForm
 from .models import Link
 
 from .serializers import LinkSerializer
 
 
 class LinkCreateView(APIView):
+    def get(self, request):
+        if 'api' in request.path:
+            return JsonResponse({"info": f"You can only create short URL using API. "
+                                         f"To create short URL, please visit http://127.0.0.1:8000/shortner/"},
+                                status=400)
+
+        form = LinkForm()
+        return render(request, 'create_short_url.html', {'form': form})
+
     def post(self, request):
         long_url = request.data.get('long_url', '')
         existing_link = Link.objects.filter(long_url=long_url).first()

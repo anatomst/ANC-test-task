@@ -7,6 +7,8 @@ class LinkForm(forms.ModelForm):
         model = Link
         fields = ('long_url',)
 
-        widgets = {
-            'long_url': forms.TextInput(attrs={'class': 'form-control'}),
-        }
+        widget = forms.URLInput(
+            attrs={'placeholder': 'https://anc.ua/ru/item/renni-z-apelsinovim-smakom-tabletki-zhuvalni-24-27890',
+                   'required': 'true'},
+        )
+

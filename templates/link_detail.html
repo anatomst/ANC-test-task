@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table class="table">
+        <tr>
+            <th>Long URL:</th>
+            <th>Short URL:</th>
+            <th>Clicks:</th>
+            <th>Last clicked at:</th>
+            <th>Delete:</th>
+        </tr>
+
+        <tr>
+            <td>
+                <a href="{{ link.long_url }}">{{ link.long_url }}</a>
+            </td>
+            <td>
+                <a href="{{ link.short_url }}">{{ link.short_url }}</a>
+            </td>
+            <td>
+                {{ object.clicks.clicks_count }}
+            </td>
+            <td>
+                {{ object.clicks.last_clicked_date }}
+            </td>
+            <td>
+                <a class="text-danger" href="{% url 'urlshortener:link_confirm' symbol=link.get_symbol %}">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <form action="{% url 'urlshortener:shortner' %}">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-plus-circle"></i> Create new short URL
+        </button>
+    </form>
+
+{% endblock %}

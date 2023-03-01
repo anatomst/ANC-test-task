@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 40vh; margin-top: 1px;">
+    <form method="post" action="{% url 'urlshortener:link_delete' symbol=object.get_symbol %}" class="text-center">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <p><b>There is no undo for this process!</b></p>
+        <button type="submit" class="btn btn-danger">
+            Confirm
+        </button>
+    </form>
+</div>
+{% endblock content %}

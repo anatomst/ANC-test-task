@@ -115,11 +115,14 @@ class LinkDeleteView(generic.View):
     success_url = reverse_lazy('urlshortener:shortner')
 
     def post(self, request, symbol):
+
         short_url = SHORT_HOST + symbol
         obj = get_object_or_404(Link, short_url=short_url)
-        obj.is_deleted = True
-        obj.save()
-        return HttpResponseRedirect(self.success_url)
+        if obj.creator == request.user or obj.ip_address == request.META.get('REMOTE_ADDR'):
+            obj.is_deleted = True
+            obj.save()
+            return HttpResponseRedirect(self.success_url)
+        raise Http404("You are not authorized to delete this link")
 
 
 class LinkRedirectView(generic.RedirectView):

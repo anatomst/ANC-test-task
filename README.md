@@ -13,7 +13,7 @@ Django project to short urls
 
 ## Features
 
-* Creating short url by API
+* Creating short url by API "api/shortner/"
 * Creating short url in browser
 * Get statistics of clicks
 

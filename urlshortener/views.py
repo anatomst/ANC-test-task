@@ -140,3 +140,35 @@ class LinkRedirectView(generic.RedirectView):
         click.clicks_count += 1
         click.save()
         return link.long_url
+
+
+class LinkCreateViewUsingAPI(generic.View):
+    """
+    View to create a short URL.
+    """
+    template_name = 'test.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    # def post(self, request):
+    #     long_url = request.POST.get('long_url', '')
+    #     existing_link = Link.objects.filter(long_url=long_url).first()
+    #     if existing_link:
+    #         short_url = request.build_absolute_uri('/') + existing_link.short_url
+    #         return JsonResponse({
+    #             "info": f"This URL already has a short link: {short_url}"
+    #         }, status=400)
+    #     serializer = LinkSerializer(data=request.POST)
+    #     if serializer.is_valid():
+    #         if request.user.is_authenticated:
+    #             serializer.save(creator=request.user)
+    #         else:
+    #             ip_address = request.META.get('REMOTE_ADDR')
+    #             serializer.save(ip_address=ip_address)
+    #         short_url = request.build_absolute_uri('/') + serializer.data['short_url']
+    #         return JsonResponse({
+    #             "long_url": long_url,
+    #             "short_url": short_url
+    #         }, status=201)
+    #     return JsonResponse(serializer.errors, status=400)

@@ -4,7 +4,7 @@ Django project to short urls
 
 ## Deployed on pythonanywhere.com
 
-[anatomst.pythonanywhere.com/shortner](anatomst.pythonanywhere.com/shortner)
+[Project on pythonanywhere ](https://anatomst.pythonanywhere.com/shortner/)
 
 ## Admin panel
 

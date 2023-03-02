@@ -20,7 +20,7 @@
         event.preventDefault();
         var longUrl = $('#long-url-input').val();
         $.ajax({
-          url: "http://127.0.0.1:8000/api/shortner/",
+          url: "{% url 'urlshortener:create_short_url_api' %}",
           method: "POST",
           data: { long_url: longUrl },
           success: function(response) {

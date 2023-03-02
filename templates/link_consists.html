@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="" style="height: 40vh; margin-top: 40px;">
+        <p class="text-center">This URL has already short link - "<a
+                href="{{ link.short_url }}">{{ link.short_url }}</a>"</p>
+        <div class="d-flex flex-column align-items-center">
+            <form action="{% url 'urlshortener:shortner' %}">
+                <input class="btn btn-success" type="submit" value="Create new short URL!"/>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

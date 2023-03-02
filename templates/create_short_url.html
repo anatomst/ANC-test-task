@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container">
+    <h1>Create Link</h1>
+    <form method="post" action="{% url 'urlshortener:shortner' %}" class="form-narrow">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-success" type="submit">Short it!</button>
+    </form>
+  </div>
+{% endblock %}
+
+<style>
+  .form-narrow {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+</style>

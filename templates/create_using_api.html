@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Create Short URL</h1>
+    <form id="create-url-form">
+      <div class="form-group">
+        <label for="long-url-input">Long URL:</label>
+        <input type="text" class="form-control" id="long-url-input" name="long_url">
+      </div>
+      <button type="submit" class="btn btn-primary">Create Short URL</button>
+    </form>
+    <div id="short-url-container"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#create-url-form').submit(function(event) {
+        event.preventDefault();
+        var longUrl = $('#long-url-input').val();
+        $.ajax({
+          url: "http://127.0.0.1:8000/api/shortner/",
+          method: "POST",
+          data: { long_url: longUrl },
+          success: function(response) {
+            var shortUrl = response.short_url;
+            $('#short-url-container').html('<p>Short URL: <a href="' + shortUrl + '">' + shortUrl + '</a></p>');
+          },
+          error: function(xhr, status, error) {
+            var message = xhr.responseJSON.info;
+            $('#short-url-container').html('<p class="text-danger">' + message + '</p>');
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}
